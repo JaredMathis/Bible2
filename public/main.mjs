@@ -6,6 +6,7 @@ export async function main(parent) {
         label: 'Douay-Rheims Version, Challoner Revision',
         key: 'drv'
     }]
+    let bible;
     let books;
 
     let {select} = await element_select_on_change(parent, versions, on_version_change);
