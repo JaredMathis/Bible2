@@ -8,10 +8,14 @@ export async function main(parent) {
     }]
     let bible;
     let books;
+    let books_select;
+    let chapters;
+    let chapters_select;
 
     let {select} = await element_select_on_change(
         parent, versions, on_version_change);
     let books_container = element(parent, 'div');
+    let chapters_container = element(parent, 'div');
 
     async function on_version_change(select) {
         bible = (await axios.get(
@@ -24,8 +28,21 @@ export async function main(parent) {
     async function books_refresh() {
         let {select} = await element_select_on_change(
             books_container, books, on_book_change);
+        books_select = select;
         async function on_book_change(select) {
+            let verse_books = _.filter(bible, {book:element_select_value(select)});
+            chapters = _.uniq(_.map(verse_books, 'chapter'));
+            await chapters_refresh();
+        }
+        await on_book_change(select)
+    }
 
+    async function chapters_refresh() {
+        console.log({chapters})
+        let {select} = await element_select_on_change(
+            chapters_container, chapters, on_chapters_change);
+        chapters_select = select;
+        async function on_chapters_change(select) {
         }
     }
 
