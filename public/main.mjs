@@ -6,15 +6,12 @@ export async function main(parent) {
         key: 'drv'
     }]
     let {select} = element_select(parent, versions);
-    // element_on(select, 'change', on_version_change)
-
-console.log(element_select_value(select))
-
-    // await on_version_change();
-    // async function on_version_change() {
-    //     let bible = await axios.get('https://wlj-bible-public.web.app/drv_parsed.json')
-    //     console.log(bible);
-    // }
+    element_on(select, 'change', on_version_change)
+    await on_version_change();
+    async function on_version_change() {
+        let bible = await axios.get(`https://wlj-bible-public.web.app/${element_select_value(select)}_parsed.json`)
+        console.log(bible);
+    }
 }
 
 function element_select_value(select) {
