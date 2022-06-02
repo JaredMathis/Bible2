@@ -15,6 +15,9 @@ function element_select(parent, versions) {
         element_html_inner_set(option, version.label);
         element_attribute_set(option, version.key);
     });
+    return {
+        select
+    }
 }
 
 export function element_attribute_set(element, attribute, value) {
