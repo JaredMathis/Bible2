@@ -13,8 +13,8 @@ export async function main(parent) {
     let books_container = element(parent, 'div');
 
     async function on_version_change(select) {
-        let bible = await axios.get(`https://wlj-bible-public.web.app/${element_select_value(select)}_parsed.json`)
-        books = _.uniq(_.map(bible.data, 'book'));
+        bible = (await axios.get(`https://wlj-bible-public.web.app/${element_select_value(select)}_parsed.json`)).data
+        books = _.uniq(_.map(bible, 'book'));
         await books_refresh();
     }
 
