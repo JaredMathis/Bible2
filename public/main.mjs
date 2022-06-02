@@ -7,52 +7,54 @@ export async function main(parent) {
         key: 'drv'
     }]
     let bible;
-    let books;
-    let books_select;
     let chapters;
-    let chapters_select;
+    let verse_books;
 
-    let {select} = await element_select_on_change(
-        parent, versions, on_version_change);
-    let books_container = element(parent, 'div');
-    let chapters_container = element(parent, 'div');
+    let version_select = await element_select(
+        parent, versions);
+    element_on(version_select, 'change', on_version_change);
 
-    async function on_version_change(select) {
+    async function on_version_change() {
         bible = (await axios.get(
             `https://wlj-bible-public.web.app/` + 
-            `${element_select_value(select)}_parsed.json`)).data
-        books = _.uniq(_.map(bible, 'book'));
-        await books_refresh();
+            `${element_select_value(version_select)}_parsed.json`)).data
+
+        books_refresh();
     }
 
-    async function books_refresh() {
-        let {select} = await element_select_on_change(
-            books_container, books, on_book_change);
-        books_select = select;
-        async function on_book_change(select) {
-            let verse_books = _.filter(bible, {book:element_select_value(select)});
-            chapters = _.uniq(_.map(verse_books, 'chapter'));
-            await chapters_refresh();
-        }
-        await on_book_change(select)
+    let book_select = await element_select(
+        parent, []);
+    element_on(book_select, 'change', on_book_change);
+
+    function books_refresh() {
+        let books = _.uniq(_.map(bible, 'book'));
+        element_select_update(book_select, books)
+        on_book_change();
     }
 
-    async function chapters_refresh() {
-        console.log({chapters})
-        let {select} = await element_select_on_change(
-            chapters_container, chapters, on_chapters_change);
-        chapters_select = select;
-        async function on_chapters_change(select) {
-        }
+    function on_book_change() {
+        let book = element_select_value(book_select);
+        console.log({book})
+        verse_books = _.filter(bible, {book});
+        chapters_refresh();
     }
 
-    await on_version_change(select);
-}
+    let chapter_select = await element_select(
+        parent, []);
+    element_on(chapter_select, 'change', on_chapter_change);
 
-async function element_select_on_change(parent, choices, on_change) {
-    let {select} = element_select(parent, choices);
-    element_on(select, 'change', on_change)
-    return {select}
+    function chapters_refresh() {
+        let chapters = _.uniq(_.map(verse_books, 'chapter'));
+        element_select_update(chapter_select, chapters)
+        on_chapter_change();
+    }
+
+    function on_chapter_change() {
+
+    }
+
+
+    await on_version_change();
 }
 
 function element_select_value(select) {
@@ -65,14 +67,17 @@ function element_on(element, event_name, on_event) {
 
 function element_select(parent, versions) {
     let select = element(parent, 'select');
+    return element_select_update(select, versions);
+}
+
+function element_select_update(select, versions) {
+    select.innerHTML = '';
     versions.forEach(version => {
         let option = element(select, 'option');
         element_html_inner_set(option, version.label || version);
         element_attribute_set(option, 'value', version.key || version);
     });
-    return {
-        select
-    }
+    return select;
 }
 
 export function element_attribute_set(element, attribute, value) {
