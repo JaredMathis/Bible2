@@ -18,8 +18,9 @@ export async function main(parent) {
     }
 
     async function books_refresh() {
-        await element_select_on_change(books_container, books, on_book_change);
+        let {select} = await element_select_on_change(books_container, books, on_book_change);
         async function on_book_change(select) {
+
         }
     }
 
