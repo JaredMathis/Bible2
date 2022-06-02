@@ -6,6 +6,14 @@ export function main(parent) {
         key: 'drv'
     }]
     let {select} = element_select(parent, versions);
+    element_on(select, 'change', async () => {
+        let bible = await axios.get('https://wlj-bible-public.web.app/drv_parsed.json')
+        console.log(bible);
+    })
+}
+
+function element_on(element, event_name, on_event) {
+    element.addEventListener(event_name, on_event);
 }
 
 function element_select(parent, versions) {
