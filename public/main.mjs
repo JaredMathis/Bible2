@@ -1,17 +1,25 @@
 import axios from 'https://cdn.skypack.dev/axios';
+import _ from 'https://cdn.skypack.dev/lodash';
 
 export async function main(parent) {
     let versions = [{
         label: 'Douay-Rheims Version, Challoner Revision',
         key: 'drv'
     }]
-    let {select} = element_select(parent, versions);
-    element_on(select, 'change', on_version_change)
-    await on_version_change();
-    async function on_version_change() {
+    let {version} = element_select_on_change(parent, versions, on_version_change);
+    async function on_version_change(select) {
         let bible = await axios.get(`https://wlj-bible-public.web.app/${element_select_value(select)}_parsed.json`)
-        console.log(bible);
+        let books = _.uniq(_.map(bible.data, 'book'));
+
+        console.log(books);
     }
+
+}
+
+async function element_select_on_change(parent, choices, on_change) {
+    let {select} = element_select(parent, choices);
+    element_on(select, 'change', on_change)
+    await on_change(select);
 }
 
 function element_select_value(select) {
