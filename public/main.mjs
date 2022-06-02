@@ -5,7 +5,7 @@ export function main(parent) {
         label: 'Douay-Rheims Version, Challoner Revision',
         key: 'drv'
     }]
-    element_select(parent, versions);
+    let {select} = element_select(parent, versions);
 }
 
 function element_select(parent, versions) {
