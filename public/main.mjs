@@ -9,17 +9,21 @@ export async function main(parent) {
     let bible;
     let books;
 
-    let {select} = await element_select_on_change(parent, versions, on_version_change);
+    let {select} = await element_select_on_change(
+        parent, versions, on_version_change);
     let books_container = element(parent, 'div');
 
     async function on_version_change(select) {
-        bible = (await axios.get(`https://wlj-bible-public.web.app/${element_select_value(select)}_parsed.json`)).data
+        bible = (await axios.get(
+            `https://wlj-bible-public.web.app/` + 
+            `${element_select_value(select)}_parsed.json`)).data
         books = _.uniq(_.map(bible, 'book'));
         await books_refresh();
     }
 
     async function books_refresh() {
-        let {select} = await element_select_on_change(books_container, books, on_book_change);
+        let {select} = await element_select_on_change(
+            books_container, books, on_book_change);
         async function on_book_change(select) {
 
         }
