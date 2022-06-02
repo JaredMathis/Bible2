@@ -5,12 +5,16 @@ export function main(parent) {
         label: 'Douay-Rheims Version, Challoner Revision',
         key: 'drv'
     }]
+    element_select(parent, versions);
+}
+
+function element_select(parent, versions) {
     let select = element(parent, 'select');
     versions.forEach(version => {
         let option = element(select, 'option');
         element_html_inner_set(option, version.label);
         element_attribute_set(option, version.key);
-    })
+    });
 }
 
 export function element_attribute_set(element, attribute, value) {
