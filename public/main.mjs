@@ -53,9 +53,17 @@ export async function main(parent) {
         on_chapter_change();
     }
 
+    let partition_select = await element_select(
+        parent, []);
+    element_on(partition_select, 'change', verses_refresh);
+
+    let array_partition_max_size = 3;
+    let partitioned;
     function on_chapter_change() {
         chapter = element_select_value(chapter_select);
         chapter_verses = _.filter(book_verses, {chapter});
+        partitioned = array_partition(chapter_verses, array_partition_max_size);
+
         token_index = 0;
         verse_index = 0;
         verses_refresh();
@@ -140,6 +148,22 @@ export async function main(parent) {
     })
 
     await on_version_change();
+}
+
+// console.log(JSON.stringify(array_partition([1,2,3,4,5,6,7,8], 3)));
+// console.log(Array.from(array_partition_flatten(array_partition([1,2,3,4,5,6,7,8], 3) )))
+
+function *array_partition_flatten(partitioned) {
+    for (let child of partitioned) {
+        if (_.isArray(child)) {
+            for (let g of array_partition_flatten(child)) {
+                yield g;
+            }
+        } else {
+            //yield child;
+        }
+    }
+    yield _.flattenDeep(partitioned)
 }
 
 function array_partition(array, min_size) {
