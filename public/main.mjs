@@ -118,16 +118,22 @@ export async function main(parent) {
             v.tokens.forEach((t, t_index) => {
                 element_spacer(tokens);
 
+                let pattern = element_select_value(pattern_select).split('');
+                const is_hidden = pattern[token_total_index % pattern.length] === '0';
+
                 let token = element(tokens, 'span');
                 if (v_index === verse_index && t_index === token_index) {
                     token.style.backgroundColor = 'black'
+
+                    if (!is_hidden) {
+                        token.style.color = 'white'
+                    }
                 }
                 if (v_index > verse_index ||
                     v_index === verse_index && t_index > token_index) {
                         token.style.color = 'gray'
 
-                        let pattern = element_select_value(pattern_select).split('');
-                        if (pattern[token_total_index % pattern.length] === '0') {
+                        if (is_hidden) {
                             token.style.color = 'white'
                         }
                     }
