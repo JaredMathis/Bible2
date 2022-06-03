@@ -11,6 +11,8 @@ export async function main(parent) {
     let chapter;
     let book_verses;
     let chapter_verses;
+    let token_index;
+    let verse_index;
 
     let version_select = await element_select(
         parent, versions);
@@ -54,6 +56,8 @@ export async function main(parent) {
     function on_chapter_change() {
         chapter = element_select_value(chapter_select);
         chapter_verses = _.filter(book_verses, {chapter});
+        token_index = 0;
+        verse_index = 0;
         verses_refresh();
     }
 
@@ -62,17 +66,20 @@ export async function main(parent) {
     verses.style.overflowY = 'auto'
     function verses_refresh() {
         element_clear(verses);
-        chapter_verses.forEach(v => {
+        chapter_verses.forEach((v, v_index) => {
             let verse = element(verses, 'div');
 
             let number = element(verse, 'span');
             element_html_inner_set(number, v.verse);
 
             let tokens = element(verse, 'span');
-            v.tokens.forEach(t => {
+            v.tokens.forEach((t, t_index) => {
                 element_spacer(tokens);
 
                 let token = element(tokens, 'span');
+                if (v_index === verse_index && t_index === token_index) {
+                    token.style.backgroundColor = 'black'
+                }
                 element_html_inner_set(token, t);
             })
         })
