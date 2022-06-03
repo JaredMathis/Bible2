@@ -220,7 +220,8 @@ export async function main(parent) {
         token_index = 0;
         verse_index = 0;
         if (partition_current_get().length >= array_partition_max_size * 2) {
-            element_select_update(pattern_select, ['10', '0']);
+            const pattern_2 = ['10', '0'];
+            element_select_update(pattern_select, pattern_2);
         } else {
             element_select_update(pattern_select, pattern_1);
         }
