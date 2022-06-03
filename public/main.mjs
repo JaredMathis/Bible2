@@ -167,15 +167,19 @@ export async function main(parent) {
         'asdfghjkl',
         'zxcvbnm'
     ];
-    keys = [keys.join("")]
+    // keys = [keys.join("")]
     keys.forEach(row => {
         let keyboard_row = element(keyboard, 'div');
         keyboard_row.style.textAlign = 'center'
 
-        row.split('').sort().forEach(k => {
+        row.split('').
+        // sort().
+        forEach(k => {
             let key = element(keyboard_row, 'button');
-            // key.style.paddingTop = '2vw';
-            // key.style.paddingBottom = '2vw';
+            key.style.paddingTop = '2vw';
+            key.style.paddingBottom = '2vw';
+            key.style.paddingLeft = '3vw';
+            key.style.paddingRight = '3vw';
             key.style.fontSize = '5vw'
             element_html_inner_set(key, k.toUpperCase());
 

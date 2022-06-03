@@ -2,12 +2,12 @@ select {
     font-size: 4vw;
 }
 
-span {
+span, button {
     font-size: 4.5vw;
 }
 
 button {
-    font-size: 3.5vw;
+    -webkit-appearance: none;
 }
 
 body {
