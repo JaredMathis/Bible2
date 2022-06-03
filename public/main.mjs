@@ -62,12 +62,11 @@ export async function main(parent) {
         element_clear(verses);
         chapter_verses.forEach(v => {
             let verse = element(verses, 'div');
-            
+
             let number = element(verse, 'span');
             element_html_inner_set(number, v.verse);
 
-            let spacer = element(verse, 'span');
-            element_html_inner_set(spacer, ' ');
+            element_spacer(verse);
 
             let tokens = element(verse, 'span');
             element_html_inner_set(tokens, v.tokens.join(' '));
@@ -76,6 +75,11 @@ export async function main(parent) {
 
 
     await on_version_change();
+}
+
+function element_spacer(parent) {
+    let spacer = element(parent, 'span');
+    element_html_inner_set(spacer, ' ');
 }
 
 function element_select_value(select) {
