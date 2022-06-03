@@ -69,7 +69,7 @@ export async function main(parent) {
         element_select_update(partition_select, partitions.map((p, index) => {
             return {
                 label: _.first(p).verse + '-' + _.last(p).verse,
-                value: index
+                key: index
             }
         }))
 
@@ -79,8 +79,16 @@ export async function main(parent) {
     }
 
     let pattern_select = await element_select(
-        parent, ['1', '110', '101', '110', '10', '01', '0']);
+        parent, ['1', '110', '101', '011', '10', '01', '0']);
     element_on(pattern_select, 'change', verses_refresh);
+
+    function partition_current_get() {
+        console.log(element_select_value(partition_select))
+        const partition_select_index =
+             _.parseInt(element_select_value(partition_select)) || 0;
+        console.log({partition_select_index})
+        return partitions[partition_select_index]
+    }
 
     let verses = element(parent, 'div');
     verses.style.maxHeight = '65vh'
@@ -88,7 +96,7 @@ export async function main(parent) {
     function verses_refresh() {
         let token_total_index = 0;
         element_clear(verses);
-        chapter_verses.forEach((v, v_index) => {
+        partition_current_get().forEach((v, v_index) => {
             let verse = element(verses, 'div');
 
             let number = element(verse, 'button');
@@ -148,6 +156,12 @@ export async function main(parent) {
                     if (token_index >= verse_tokens.length) {
                         verse_index++;
                         token_index = 0;
+
+                        if (verse_index >= partition_current_get().length) {
+                            pattern_select.selectedIndex = pattern_select.selectedIndex + 1;
+                            verse_index = 0;
+                            verses_refresh();
+                        }
                     }
 
                     verses_refresh();
