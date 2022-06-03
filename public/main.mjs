@@ -62,6 +62,13 @@ export async function main(parent) {
         element_clear(verses);
         chapter_verses.forEach(v => {
             let verse = element(verses, 'div');
+            
+            let number = element(verse, 'span');
+            element_html_inner_set(number, v.verse);
+
+            let spacer = element(verse, 'span');
+            element_html_inner_set(spacer, ' ');
+
             let tokens = element(verse, 'span');
             element_html_inner_set(tokens, v.tokens.join(' '));
         })
