@@ -13,6 +13,7 @@ export async function main(parent) {
     let chapter_verses;
     let token_index;
     let verse_index;
+    let errors;
 
     let version_select = await element_select(
         parent, versions);
@@ -76,6 +77,7 @@ export async function main(parent) {
             }
         }))
 
+        errors = {};
         token_index = 0;
         verse_index = 0;
         verses_refresh();
@@ -137,11 +139,20 @@ export async function main(parent) {
                             token.style.color = 'white'
                         }
                     }
+                if (errors[error_index_get(v_index, t_index)]) {
+                    token.style.color = 'red';
+                    console.error('ehere')
+                }
                 element_html_inner_set(token, t);
 
                 token_total_index++;
             })
         })
+        console.log({errors})
+    }
+
+    function error_index_get(verse_index, token_index) {
+        return verse_index + '-' + token_index;
     }
 
     let keyboard = element(parent, 'div');
@@ -165,7 +176,7 @@ export async function main(parent) {
                 let expected = verse_tokens[token_index][0].toLowerCase();
 
                 if (k !== expected) {
-                    
+                    errors[error_index_get(verse_index, token_index)] = true;
                 } else {
                     token_index++;
 
@@ -185,10 +196,8 @@ export async function main(parent) {
                             }
                         }
                     }
-
-                    console.log({pattern_select:element_select_value(pattern_select)})
-                    verses_refresh();
                 }
+                verses_refresh();
             })
         })
     })
