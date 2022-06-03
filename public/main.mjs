@@ -156,11 +156,12 @@ export async function main(parent) {
 
         row.split('').forEach(k => {
             let key = element(keyboard_row, 'button');
-            // key.style.padding = '1vw';
+            key.style.paddingTop = '2vw';
+            key.style.paddingBottom = '2vw';
             element_html_inner_set(key, k.toUpperCase());
 
             key.addEventListener('click', () => {
-                const verse_tokens = chapter_verses[verse_index].tokens;
+                const verse_tokens = partition_current_get()[verse_index].tokens;
                 let expected = verse_tokens[token_index][0].toLowerCase();
 
                 if (k === expected) {
