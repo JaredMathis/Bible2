@@ -56,8 +56,9 @@ export async function main(parent) {
     let partition_select = await element_select(
         parent, []);
     element_on(partition_select, 'change', () => {
+        partition_select_changed();
         verses_refresh();
-    } );
+    });
 
     let array_partition_max_size = 3;
     let partitioned;
@@ -84,7 +85,9 @@ export async function main(parent) {
 
     let pattern_select = await element_select(
         parent, pattern_1);
-    element_on(pattern_select, 'change', verses_refresh);
+    element_on(pattern_select, 'change', () => {
+        verses_refresh();
+    });
 
     function partition_current_get() {
         console.log(element_select_value(partition_select))
@@ -169,6 +172,7 @@ export async function main(parent) {
                                 pattern_select.selectedIndex = 0;
 
                                 element_index_selected_increment(partition_select)
+                                // partition_select_changed();
                             }
                         }
                     }
@@ -181,6 +185,16 @@ export async function main(parent) {
     })
 
     await on_version_change();
+
+    function partition_select_changed() {
+        token_index = 0;
+        verse_index = 0;
+        if (partition_current_get().length >= array_partition_max_size * 2) {
+            element_select_update(pattern_select, ['10', '0']);
+        } else {
+            element_select_update(pattern_select, pattern_1);
+        }
+    }
 }
 
 function element_index_selected_increment(element) {
