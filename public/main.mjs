@@ -7,8 +7,10 @@ export async function main(parent) {
         key: 'drv'
     }]
     let bible;
-    let chapters;
-    let verse_books;
+    let book;
+    let chapter;
+    let book_verses;
+    let chapter_verses;
 
     let version_select = await element_select(
         parent, versions);
@@ -33,9 +35,9 @@ export async function main(parent) {
     }
 
     function on_book_change() {
-        let book = element_select_value(book_select);
+        book = element_select_value(book_select);
         console.log({book})
-        verse_books = _.filter(bible, {book});
+        book_verses = _.filter(bible, {book});
         chapters_refresh();
     }
 
@@ -44,13 +46,24 @@ export async function main(parent) {
     element_on(chapter_select, 'change', on_chapter_change);
 
     function chapters_refresh() {
-        let chapters = _.uniq(_.map(verse_books, 'chapter'));
+        let chapters = _.uniq(_.map(book_verses, 'chapter'));
         element_select_update(chapter_select, chapters)
         on_chapter_change();
     }
 
     function on_chapter_change() {
+        chapter = element_select_value(chapter_select);
+        chapter_verses = _.filter(book_verses, {chapter});
+        verses_refresh();
+    }
 
+    let verses = element(parent, 'div');
+    function verses_refresh() {
+        element_clear(verses);
+        chapter_verses.forEach(v => {
+            let verse = element(verses, 'div');
+            element_html_inner_set(verse, v.tokens.join(' '));
+        })
     }
 
 
@@ -71,13 +84,17 @@ function element_select(parent, versions) {
 }
 
 function element_select_update(select, versions) {
-    select.innerHTML = '';
+    element_clear(select);
     versions.forEach(version => {
         let option = element(select, 'option');
         element_html_inner_set(option, version.label || version);
         element_attribute_set(option, 'value', version.key || version);
     });
     return select;
+}
+
+function element_clear(element) {
+    element.innerHTML = '';
 }
 
 export function element_attribute_set(element, attribute, value) {
