@@ -57,6 +57,20 @@ export async function main(parent) {
         verses_refresh();
     }
 
+    let keyboard = element(parent, 'div');
+    let keys = [
+        'qwertyuiop',
+        'asdfghjkl',
+        'zxcvbnm'
+    ]
+    keys.forEach(row => {
+        let keyboard_row = element(keyboard, 'div');
+        row.split('').forEach(k => {
+            let key = element(keyboard_row, 'button');
+            element_html_inner_set(key, k.toUpperCase());
+        })
+    })
+
     let verses = element(parent, 'div');
     function verses_refresh() {
         element_clear(verses);
