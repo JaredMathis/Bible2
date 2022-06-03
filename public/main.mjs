@@ -101,8 +101,12 @@ export async function main(parent) {
             element_html_inner_set(key, k.toUpperCase());
 
             key.addEventListener('click', () => {
-                token_index++;
-                verses_refresh();
+                let expected = chapter_verses[verse_index].tokens[token_index][0].toLowerCase();
+
+                if (k === expected) {
+                    token_index++;
+                    verses_refresh();
+                }
             })
         })
     })
