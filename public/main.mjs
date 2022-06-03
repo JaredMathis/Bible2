@@ -123,7 +123,8 @@ export async function main(parent) {
 
                 let pattern = element_select_value(pattern_select).split('');
                 const is_hidden = pattern[token_total_index % pattern.length] === '0';
-
+                let is_error = errors[error_index_get(v_index, t_index)];
+                
                 let token = element(tokens, 'span');
                 if (v_index === verse_index && t_index === token_index) {
                     token.style.backgroundColor = 'black'
@@ -140,7 +141,7 @@ export async function main(parent) {
                             token.style.color = 'white'
                         }
                     }
-                if (errors[error_index_get(v_index, t_index)]) {
+                if (is_error) {
                     token.style.color = 'red';
                 }
                 element_html_inner_set(token, t);
