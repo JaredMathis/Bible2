@@ -151,7 +151,6 @@ function array_partition(array, min_size) {
         result.push(array_partition(left, min_size));
         result.push(array_partition(right, min_size));
     } else {
-        console.log({array})
         result = array;
     }
     return result;
