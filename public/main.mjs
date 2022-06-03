@@ -78,6 +78,8 @@ export async function main(parent) {
         verses_refresh();
     }
 
+    // let pattern_1 = 
+
     let pattern_select = await element_select(
         parent, ['1', '110', '101', '011', '10', '01', '0']);
     element_on(pattern_select, 'change', verses_refresh);
@@ -158,12 +160,18 @@ export async function main(parent) {
                         token_index = 0;
 
                         if (verse_index >= partition_current_get().length) {
-                            pattern_select.selectedIndex = pattern_select.selectedIndex + 1;
                             verse_index = 0;
-                            verses_refresh();
+                            element_index_selected_increment(pattern_select)
+
+                            if (pattern_select.selectedIndex < 0) {
+                                pattern_select.selectedIndex = 0;
+
+                                element_index_selected_increment(partition_select)
+                            }
                         }
                     }
 
+                    console.log({pattern_select:element_select_value(pattern_select)})
                     verses_refresh();
                 }
             })
@@ -171,6 +179,10 @@ export async function main(parent) {
     })
 
     await on_version_change();
+}
+
+function element_index_selected_increment(element) {
+    element.selectedIndex = element.selectedIndex + 1;
 }
 
 // console.log(JSON.stringify(array_partition([1,2,3,4,5,6,7,8], 3)));
