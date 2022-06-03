@@ -65,6 +65,8 @@ export async function main(parent) {
     ]
     keys.forEach(row => {
         let keyboard_row = element(keyboard, 'div');
+        keyboard_row.style.textAlign = 'center'
+
         row.split('').forEach(k => {
             let key = element(keyboard_row, 'button');
             element_html_inner_set(key, k.toUpperCase());
