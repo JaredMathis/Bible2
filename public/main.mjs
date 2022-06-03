@@ -110,6 +110,12 @@ export async function main(parent) {
 
                 if (k === expected) {
                     token_index++;
+
+                    if (token_index >= verse_tokens.length) {
+                        verse_index++;
+                        token_index = 0;
+                    }
+
                     verses_refresh();
                 }
             })
