@@ -62,7 +62,8 @@ export async function main(parent) {
         element_clear(verses);
         chapter_verses.forEach(v => {
             let verse = element(verses, 'div');
-            element_html_inner_set(verse, v.tokens.join(' '));
+            let tokens = element(verse, 'span');
+            element_html_inner_set(tokens, v.tokens.join(' '));
         })
     }
 
