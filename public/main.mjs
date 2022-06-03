@@ -150,7 +150,7 @@ export async function main(parent) {
 
         row.split('').forEach(k => {
             let key = element(keyboard_row, 'button');
-            key.style.padding = '2vw';
+            key.style.padding = '1vw';
             element_html_inner_set(key, k.toUpperCase());
 
             key.addEventListener('click', () => {
