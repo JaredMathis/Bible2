@@ -69,8 +69,13 @@ export async function main(parent) {
         chapter_verses.forEach((v, v_index) => {
             let verse = element(verses, 'div');
 
-            let number = element(verse, 'span');
+            let number = element(verse, 'button');
             element_html_inner_set(number, v.verse);
+            number.addEventListener('click', () => {
+                verse_index = v_index;
+                token_index = 0;
+                verses_refresh();
+            })
 
             let tokens = element(verse, 'span');
             v.tokens.forEach((t, t_index) => {
