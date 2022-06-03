@@ -80,6 +80,10 @@ export async function main(parent) {
                 if (v_index === verse_index && t_index === token_index) {
                     token.style.backgroundColor = 'black'
                 }
+                if (v_index > verse_index ||
+                    v_index === verse_index && t_index > token_index) {
+                        token.style.color = 'gray'
+                    }
                 element_html_inner_set(token, t);
             })
         })
@@ -101,7 +105,8 @@ export async function main(parent) {
             element_html_inner_set(key, k.toUpperCase());
 
             key.addEventListener('click', () => {
-                let expected = chapter_verses[verse_index].tokens[token_index][0].toLowerCase();
+                const verse_tokens = chapter_verses[verse_index].tokens;
+                let expected = verse_tokens[token_index][0].toLowerCase();
 
                 if (k === expected) {
                     token_index++;
