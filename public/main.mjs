@@ -142,6 +142,21 @@ export async function main(parent) {
     await on_version_change();
 }
 
+function array_partition(array, min_size) {
+    let result = [];
+    if (array.length >= min_size * 2) {
+        let middle = Math.floor(array.length / 2);
+        let left = array.slice(0, middle);
+        let right = array.slice(middle);
+        result.push(array_partition(left, min_size));
+        result.push(array_partition(right, min_size));
+    } else {
+        console.log({array})
+        result = array;
+    }
+    return result;
+}
+
 function element_spacer(parent) {
     let spacer = element(parent, 'span');
     element_html_inner_set(spacer, ' ');
