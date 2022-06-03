@@ -61,10 +61,14 @@ export async function main(parent) {
         verses_refresh();
     }
 
+    let pattern_select = await element_select(
+        parent, ['1', '110', '101', '110', '10', '01', '0']);
+
     let verses = element(parent, 'div');
     verses.style.maxHeight = '65vh'
     verses.style.overflowY = 'auto'
     function verses_refresh() {
+        let token_total_index = 0;
         element_clear(verses);
         chapter_verses.forEach((v, v_index) => {
             let verse = element(verses, 'div');
@@ -88,8 +92,15 @@ export async function main(parent) {
                 if (v_index > verse_index ||
                     v_index === verse_index && t_index > token_index) {
                         token.style.color = 'gray'
+
+                        let pattern = element_select_value(pattern_select).split('');
+                        if (pattern[token_total_index % pattern.length] === '0') {
+                            token.style.color = 'white'
+                        }
                     }
                 element_html_inner_set(token, t);
+
+                token_total_index++;
             })
         })
     }
