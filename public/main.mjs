@@ -3,7 +3,7 @@ import _ from 'https://cdn.skypack.dev/lodash';
 
 export async function main(parent) {
     let versions = [{
-        label: 'Douay-Rheims Version, Challoner Revision',
+        label: 'Douay-Rheims Version, Challoner',
         key: 'drv'
     }]
     let bible;
