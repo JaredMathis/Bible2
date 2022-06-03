@@ -139,6 +139,9 @@ export async function main(parent) {
 
                         if (is_hidden) {
                             let color = 'lightgray';
+                            if (element_select_value(pattern_select) === '0') {
+                                color = 'white'
+                            }
                             token.style.color = color
                             token.style.backgroundColor = color
                         }
