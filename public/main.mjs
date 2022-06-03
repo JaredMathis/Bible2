@@ -55,7 +55,9 @@ export async function main(parent) {
 
     let partition_select = await element_select(
         parent, []);
-    element_on(partition_select, 'change', verses_refresh);
+    element_on(partition_select, 'change', () => {
+        verses_refresh();
+    } );
 
     let array_partition_max_size = 3;
     let partitioned;
@@ -78,10 +80,10 @@ export async function main(parent) {
         verses_refresh();
     }
 
-    // let pattern_1 = 
+    let pattern_1 = ['1', '110', '101', '011', '10', '01', '0'];
 
     let pattern_select = await element_select(
-        parent, ['1', '110', '101', '011', '10', '01', '0']);
+        parent, pattern_1);
     element_on(pattern_select, 'change', verses_refresh);
 
     function partition_current_get() {
