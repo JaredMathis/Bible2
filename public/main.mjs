@@ -58,7 +58,7 @@ export async function main(parent) {
     }
 
     let verses = element(parent, 'div');
-    verses.style.maxHeight = '70vh'
+    verses.style.maxHeight = '65vh'
     verses.style.overflowY = 'auto'
     function verses_refresh() {
         element_clear(verses);
@@ -90,6 +90,7 @@ export async function main(parent) {
 
         row.split('').forEach(k => {
             let key = element(keyboard_row, 'button');
+            key.style.padding = '2vw';
             element_html_inner_set(key, k.toUpperCase());
         })
     })
