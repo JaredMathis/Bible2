@@ -177,7 +177,7 @@ export async function main(parent) {
             key.style.paddingBottom = '2vw';
             element_html_inner_set(key, k.toUpperCase());
 
-            key.addEventListener('click', () => {
+            key.addEventListener('mousedown', () => {
                 const verse_tokens = partition_current_get()[verse_index].tokens;
                 let expected = verse_tokens[token_index][0].toLowerCase();
 
