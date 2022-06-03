@@ -83,7 +83,7 @@ export async function main(parent) {
         verses_refresh();
     }
 
-    let pattern_1 = ['1', '1110', '1101', '1011', '0111', '10', '01', '100', '0'];
+    let pattern_1 = ['1', '1110', '1101', '1011', '0111', '10', '01', '100', '0', '0', '0'];
 
     let pattern_select = await element_select(
         parent, pattern_1);
@@ -220,7 +220,7 @@ export async function main(parent) {
         token_index = 0;
         verse_index = 0;
         if (partition_current_get().length >= array_partition_max_size * 2) {
-            const pattern_2 = ['10', '100', '0'];
+            const pattern_2 = ['10', '01', '100', '0', '0', '0'];
             element_select_update(pattern_select, pattern_2);
         } else {
             element_select_update(pattern_select, pattern_1);
