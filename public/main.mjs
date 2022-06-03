@@ -179,7 +179,7 @@ export async function main(parent) {
                                 pattern_select.selectedIndex = 0;
 
                                 element_index_selected_increment(partition_select)
-                                // partition_select_changed();
+                                partition_select_changed();
                             }
                         }
                     }
