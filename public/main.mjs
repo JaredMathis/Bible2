@@ -88,6 +88,7 @@ export async function main(parent) {
     let pattern_select = await element_select(
         parent, pattern_1);
     element_on(pattern_select, 'change', () => {
+        errors = {};
         verses_refresh();
     });
 
@@ -215,6 +216,7 @@ export async function main(parent) {
     await on_version_change();
 
     function partition_select_changed() {
+        errors = {};
         token_index = 0;
         verse_index = 0;
         if (partition_current_get().length >= array_partition_max_size * 2) {
