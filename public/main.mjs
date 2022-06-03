@@ -191,8 +191,8 @@ export async function main(parent) {
             let key = element(keyboard_row, 'button');
             key.style.paddingTop = '2vw';
             key.style.paddingBottom = '2vw';
-            key.style.paddingLeft = '3vw';
-            key.style.paddingRight = '3vw';
+            key.style.paddingLeft = '2.5vw';
+            key.style.paddingRight = '2.5vw';
             key.style.fontSize = '5vw'
             element_html_inner_set(key, k.toUpperCase());
 
@@ -200,7 +200,7 @@ export async function main(parent) {
                 const verse_tokens = partition_current_get()[verse_index].tokens;
                 let expected = verse_tokens[token_index][0].toLowerCase();
 
-                if (k !== expected) {
+                if (!key_is_near(k, expected)) {
                     errors[error_index_get(verse_index, token_index)] = true;
                 } else {
                     token_index++;
@@ -251,6 +251,38 @@ export async function main(parent) {
             element_select_update(pattern_select, pattern_1);
         }
     }
+}
+
+let key_is_near_mapping = {
+    'q': 'wa',
+    'w': 'qase',
+    'e': 'wsdr',
+    'r': 'edft',
+    't': 'rfgy',
+    'y': 'tghu',
+    'u': 'yhji',
+    'i': 'ujko',
+    'o': 'iklp',
+    'p': 'ol',
+    'a': 'qwsz',
+    's': 'awedxz',
+    'd': 'serfcx',
+    'f': 'drtgvc',
+    'g': 'ftyhbv',
+    'h': 'gyujnb',
+    'j': 'huikmn',
+    'k': 'jiolm',
+    'l': 'kop',
+    'z': 'asx',
+    'x': 'zsdc',
+    'c': 'xdfv',
+    'v': 'cfgb',
+    'b': 'vghn',
+    'n': 'bhjm',
+    'm': 'njk',
+}
+function key_is_near(k, expected) {
+    return key_is_near_mapping[k].split('').concat(k).includes(expected)
 }
 
 function element_index_selected_increment(element) {
