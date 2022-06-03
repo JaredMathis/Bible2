@@ -101,7 +101,7 @@ export async function main(parent) {
     }
 
     let verses = element(parent, 'div');
-    verses.style.maxHeight = '65vh'
+    verses.style.maxHeight = '55vh'
     verses.style.overflowY = 'auto'
     function verses_refresh() {
         let token_total_index = 0;
@@ -166,15 +166,17 @@ export async function main(parent) {
         'qwertyuiop',
         'asdfghjkl',
         'zxcvbnm'
-    ]
+    ];
+    keys = [keys.join("")]
     keys.forEach(row => {
         let keyboard_row = element(keyboard, 'div');
         keyboard_row.style.textAlign = 'center'
 
-        row.split('').forEach(k => {
+        row.split('').sort().forEach(k => {
             let key = element(keyboard_row, 'button');
-            key.style.paddingTop = '2vw';
-            key.style.paddingBottom = '2vw';
+            // key.style.paddingTop = '2vw';
+            // key.style.paddingBottom = '2vw';
+            key.style.fontSize = '5vw'
             element_html_inner_set(key, k.toUpperCase());
 
             key.addEventListener('mousedown', () => {
