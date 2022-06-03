@@ -66,10 +66,13 @@ export async function main(parent) {
             let number = element(verse, 'span');
             element_html_inner_set(number, v.verse);
 
-            element_spacer(verse);
-
             let tokens = element(verse, 'span');
-            element_html_inner_set(tokens, v.tokens.join(' '));
+            v.tokens.forEach(t => {
+                element_spacer(tokens);
+
+                let token = element(tokens, 'span');
+                element_html_inner_set(token, t);
+            })
         })
     }
 
