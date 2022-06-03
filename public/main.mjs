@@ -107,7 +107,6 @@ export async function main(parent) {
         })
     })
 
-
     await on_version_change();
 }
 
