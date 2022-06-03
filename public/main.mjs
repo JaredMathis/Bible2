@@ -63,6 +63,7 @@ export async function main(parent) {
 
     let pattern_select = await element_select(
         parent, ['1', '110', '101', '110', '10', '01', '0']);
+    element_on(pattern_select, 'change', verses_refresh);
 
     let verses = element(parent, 'div');
     verses.style.maxHeight = '65vh'
