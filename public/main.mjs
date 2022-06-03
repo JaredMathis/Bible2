@@ -141,7 +141,6 @@ export async function main(parent) {
                     }
                 if (errors[error_index_get(v_index, t_index)]) {
                     token.style.color = 'red';
-                    console.error('ehere')
                 }
                 element_html_inner_set(token, t);
 
@@ -186,13 +185,24 @@ export async function main(parent) {
 
                         if (verse_index >= partition_current_get().length) {
                             verse_index = 0;
-                            element_index_selected_increment(pattern_select)
 
-                            if (pattern_select.selectedIndex < 0) {
-                                pattern_select.selectedIndex = 0;
+                            let repeat = false;
+                            if (element_select_value(pattern_select) === '0') {
+                                if (_.keys(errors).length > 0) {
+                                    repeat = true;    
+                                }
+                            }
 
-                                element_index_selected_increment(partition_select)
-                                partition_select_changed();
+                            errors = {};
+                            if (!repeat) {
+                                element_index_selected_increment(pattern_select)
+    
+                                if (pattern_select.selectedIndex < 0) {
+                                    pattern_select.selectedIndex = 0;
+    
+                                    element_index_selected_increment(partition_select)
+                                    partition_select_changed();
+                                }
                             }
                         }
                     }
