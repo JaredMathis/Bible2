@@ -99,6 +99,11 @@ export async function main(parent) {
             let key = element(keyboard_row, 'button');
             key.style.padding = '2vw';
             element_html_inner_set(key, k.toUpperCase());
+
+            key.addEventListener('click', () => {
+                token_index++;
+                verses_refresh();
+            })
         })
     })
 
