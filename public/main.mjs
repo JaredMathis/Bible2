@@ -138,8 +138,9 @@ export async function main(parent) {
                         token.style.color = 'gray'
 
                         if (is_hidden) {
-                            token.style.color = 'lightgray'
-                            token.style.backgroundColor = 'lightgray'
+                            let color = 'lightgray';
+                            token.style.color = color
+                            token.style.backgroundColor = color
                         }
                     }
                 if (is_error) {
