@@ -59,10 +59,19 @@ export async function main(parent) {
 
     let array_partition_max_size = 3;
     let partitioned;
+    let partitions;
     function on_chapter_change() {
         chapter = element_select_value(chapter_select);
         chapter_verses = _.filter(book_verses, {chapter});
         partitioned = array_partition(chapter_verses, array_partition_max_size);
+        partitions = Array.from(array_partition_flatten(partitioned));
+        console.log(partitions)
+        element_select_update(partition_select, partitions.map((p, index) => {
+            return {
+                label: _.first(p).verse + '-' + _.last(p).verse,
+                value: index
+            }
+        }))
 
         token_index = 0;
         verse_index = 0;
