@@ -81,7 +81,7 @@ export async function main(parent) {
         verses_refresh();
     }
 
-    let pattern_1 = ['1', '1110', '1101', '1011', '0111', '10', '01', '0'];
+    let pattern_1 = ['1', '1110', '1101', '1011', '0111', '10', '01', '100', '0'];
 
     let pattern_select = await element_select(
         parent, pattern_1);
