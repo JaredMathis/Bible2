@@ -61,7 +61,7 @@ export async function main(parent) {
         verses_refresh();
     });
 
-    let array_partition_max_size = 3;
+    let array_partition_max_size = 2;
     let partitioned;
     let partitions;
     function on_chapter_change() {
@@ -92,7 +92,7 @@ export async function main(parent) {
         '10', 
         '01', 
         '100', 
-        '1000', 
+        '1001000', 
         '0', 
         '0', 
         '0'
@@ -139,6 +139,10 @@ export async function main(parent) {
                 const is_hidden = pattern[token_total_index % pattern.length] === '0';
                 let is_error = errors[error_index_get(v_index, t_index)];
 
+                if (is_error) {
+                    token.style.color = 'red';
+                }
+
                 let token = element(tokens, 'span');
                 if (v_index === verse_index && t_index === token_index) {
                     token.style.backgroundColor = 'black'
@@ -160,9 +164,6 @@ export async function main(parent) {
                             token.style.backgroundColor = color
                         }
                     }
-                if (is_error) {
-                    token.style.color = 'red';
-                }
                 element_html_inner_set(token, t);
 
                 token_total_index++;
