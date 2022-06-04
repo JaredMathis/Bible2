@@ -1,7 +1,7 @@
 import axios from 'https://cdn.skypack.dev/axios';
 import _ from 'https://cdn.skypack.dev/lodash';
 
-export async function main(parent) {
+export async function main(parent, bible_override) {
     let versions = [{
         label: 'Douay-Rheims Version, Challoner',
         key: 'drv'
@@ -19,10 +19,18 @@ export async function main(parent) {
         parent, versions);
     element_on(version_select, 'change', on_version_change);
 
+    if(bible_override) {
+        version_select.style.display = 'none'
+    }
+
     async function on_version_change() {
-        bible = (await axios.get(
-            `https://wlj-bible-public.web.app/` + 
-            `${element_select_value(version_select)}_parsed.json`)).data
+        if (bible_override) {
+            bible = bible_override
+        } else {
+            bible = (await axios.get(
+                `https://wlj-bible-public.web.app/` + 
+                `${element_select_value(version_select)}_parsed.json`)).data
+        }
 
         books_refresh();
     }
