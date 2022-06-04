@@ -39,7 +39,6 @@ export async function main(parent) {
 
     function on_book_change() {
         book = element_select_value(book_select);
-        console.log({book})
         book_verses = _.filter(bible, {book});
         chapters_refresh();
     }
@@ -69,7 +68,6 @@ export async function main(parent) {
         chapter_verses = _.filter(book_verses, {chapter});
         partitioned = array_partition(chapter_verses, array_partition_max_size);
         partitions = Array.from(array_partition_flatten(partitioned));
-        console.log(partitions)
         element_select_update(partition_select, partitions.map((p, index) => {
             return {
                 label: _.first(p).verse + '-' + _.last(p).verse,
@@ -106,10 +104,8 @@ export async function main(parent) {
     });
 
     function partition_current_get() {
-        console.log(element_select_value(partition_select))
         const partition_select_index =
              _.parseInt(element_select_value(partition_select)) || 0;
-        console.log({partition_select_index})
         return partitions[partition_select_index]
     }
 
@@ -150,7 +146,6 @@ export async function main(parent) {
                 token_total_index++;
             })
         })
-        console.log({errors})
     }
 
     function token_color_update(pattern, token, v_index, t_index) {
@@ -260,6 +255,7 @@ export async function main(parent) {
                 if (refresh) {
                     verses_refresh();
                 } else {
+                    console.log('here')
                     let pattern = pattern_get();
 
                     let token_before = verses_tokens[verse_index_before][token_index_before];
