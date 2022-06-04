@@ -112,8 +112,9 @@ export async function main(parent) {
     let verses_tokens;
 
     let verses = element(parent, 'div');
-    verses.style.maxHeight = '55vh'
-    verses.style.minHeight = '55vh'
+    let height = '50vh';
+    verses.style.maxHeight = height
+    verses.style.minHeight = height
     verses.style.overflowY = 'auto'
     function verses_refresh() {
         let token_total_index = 0;
