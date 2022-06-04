@@ -1,0 +1,69 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+</head>
+<link rel="stylesheet" href="./../style.css">
+<script type="module">
+    import {main} from './../main.mjs';
+    let bible = [
+        {
+          "text": "If I speak in the tongues of men and of angels, but have not love, I am a noisy gong or a clanging cymbal.",
+          "ID": "1"
+        },
+        {
+          "text": "And if I have prophetic powers, and understand all mysteries and all knowledge, and if I have all faith, so as to remove mountains, but have not love, I am nothing.",
+          "ID": "2"
+        },
+        {
+          "text": "If I give away all I have, and if I deliver up my body to be burned, but have not love, I gain nothing.",
+          "ID": "3"
+        },
+        {
+          "text": "Love is patient and kind; love does not envy or boast; it is not arrogant",
+          "ID": "4"
+        },
+        {
+          "text": "or rude. It does not insist on its own way; it is not irritable or resentful;",
+          "ID": "5"
+        },
+        {
+          "text": "it does not rejoice at wrongdoing, but rejoices with the truth.",
+          "ID": "6"
+        },
+        {
+          "text": "Love bears all things, believes all things, hopes all things, endures all things.",
+          "ID": "7"
+        },
+        {
+          "text": "Love never ends. As for prophecies, they will pass away; as for tongues, they will cease; as for knowledge, it will pass away.",
+          "ID": "8"
+        },
+        {
+          "text": "For we know in part and we prophesy in part,",
+          "ID": "9"
+        },
+        {
+          "text": "but when the perfect comes, the partial will pass away.",
+          "ID": "10"
+        },
+        {
+          "text": "When I was a child, I spoke like a child, I thought like a child, I reasoned like a child. When I became a man, I gave up childish ways.",
+          "ID": "11"
+        },
+        {
+          "text": "For now we see in a mirror dimly, but then face to face. Now I know in part; then I shall know fully, even as I have been fully known.",
+          "ID": "12"
+        },
+        {
+          "text": "So now faith, hope, and love abide, these three; but the greatest of these is love.",
+          "ID": "13"
+        }
+      ].map(v => {
+          return {
+              tokens: v.text.split(' '),
+              book: '1 Corinthians',
+              chapter: '13',
+              verse: v.ID
+          };
+      }).filter(v => 4 <= v.verse && v.verse <= 7);
+    await main(document.body, bible);
+</script>
