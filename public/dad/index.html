@@ -66,4 +66,11 @@
           };
       });
     await main(document.body, bible);
+
+    
+    document.addEventListener('keydown', (event) => {
+            event.preventDefault();
+            var name = event.key;
+            console.log({name})
+        });
 </script>

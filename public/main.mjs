@@ -230,7 +230,15 @@ export async function main(parent, bible_override) {
                 on_key(k);
             })
         })
+
+
     })
+    
+    document.addEventListener('keydown', _.debounce((event) => {
+        event.preventDefault();
+        var name = event.key;
+        on_key(name);
+    }, 100), false);
 
     await on_version_change();
 
