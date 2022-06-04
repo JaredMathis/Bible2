@@ -144,7 +144,7 @@ export async function main(parent) {
                 token.dataset.tokenTotalIndex = token_total_index;
                 _.last(verses_tokens).push(token);
 
-                token_color_update(pattern, v_index, t_index);
+                token_color_update(pattern, token, v_index, t_index);
                 element_html_inner_set(token, t);
 
                 token_total_index++;
@@ -153,17 +153,17 @@ export async function main(parent) {
         console.log({errors})
     }
 
-    function token_color_update(pattern, v_index, t_index) {
-        let token = verses_tokens[v_index][t_index];
+    function token_color_update(pattern, token, v_index, t_index) {
         let is_hidden = pattern[token.dataset.tokenTotalIndex % pattern.length] === '0';
         let is_error = errors[error_index_get(v_index, t_index)];
 
+        token.style.backgroundColor = 'white'
+        token.style.color = 'black'
         if (is_error) {
             token.style.color = 'red';
         }
         if (v_index === verse_index && t_index === token_index) {
             token.style.backgroundColor = 'black';
-
             if (!is_hidden) {
                 token.style.color = 'white';
             }
@@ -217,6 +217,9 @@ export async function main(parent) {
                 const verse_tokens = partition_current_get()[verse_index].tokens;
                 let expected = verse_tokens[token_index][0].toLowerCase();
 
+                let token_index_before = token_index;
+                let verse_index_before = verse_index;
+
                 let refresh = false;
                 if (!key_is_near(k, expected)) {
                     errors[error_index_get(verse_index, token_index)] = true;
@@ -253,11 +256,17 @@ export async function main(parent) {
                         }
                     }
                 }
-                refresh = true;
+                // refresh = true;
                 if (refresh) {
                     verses_refresh();
                 } else {
-                    token_color_update(pattern, verse_index, token_index);
+                    let pattern = pattern_get();
+
+                    let token_before = verses_tokens[verse_index_before][token_index_before];
+                    token_color_update(pattern, token_before, verse_index_before, token_index_before);
+
+                    let token = verses_tokens[verse_index][token_index];
+                    token_color_update(pattern, token, verse_index, token_index);
                 }
             })
         })
