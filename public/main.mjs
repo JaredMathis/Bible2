@@ -213,6 +213,7 @@ export async function main(parent) {
                 const verse_tokens = partition_current_get()[verse_index].tokens;
                 let expected = verse_tokens[token_index][0].toLowerCase();
 
+                let refresh = false;
                 if (!key_is_near(k, expected)) {
                     errors[error_index_get(verse_index, token_index)] = true;
                 } else {
@@ -246,7 +247,10 @@ export async function main(parent) {
                         }
                     }
                 }
-                verses_refresh();
+                refresh = true;
+                if (refresh) {
+                    verses_refresh();
+                }
             })
         })
     })
