@@ -137,10 +137,11 @@ export async function main(parent) {
                 element_spacer(tokens);
 
                 let token = element(tokens, 'span');
+                token.dataset.tokenTotalIndex = token_total_index;
 
                 let pattern = pattern_get();
 
-                let is_hidden = pattern[token_total_index % pattern.length] === '0';
+                let is_hidden = pattern[token.dataset.tokenTotalIndex % pattern.length] === '0';
                 let is_error = errors[error_index_get(v_index, t_index)];
 
                 if (is_error) {
