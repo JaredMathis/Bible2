@@ -166,6 +166,11 @@ export async function main(parent) {
         if (v_index === verse_index && t_index === token_index) {
             token.style.backgroundColor = is_error ? 'red' : 'black';
             token.style.color = 'white';
+            if (is_hidden) {
+                if (!is_error) {
+                    token.style.color = 'black';
+                }
+            }
         }
         if (v_index > verse_index ||
             v_index === verse_index && t_index > token_index) {
