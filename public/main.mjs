@@ -141,38 +141,42 @@ export async function main(parent) {
 
                 let pattern = pattern_get();
 
-                let is_hidden = pattern[token.dataset.tokenTotalIndex % pattern.length] === '0';
-                let is_error = errors[error_index_get(v_index, t_index)];
-
-                if (is_error) {
-                    token.style.color = 'red';
-                }
-                if (v_index === verse_index && t_index === token_index) {
-                    token.style.backgroundColor = 'black'
-
-                    if (!is_hidden) {
-                        token.style.color = 'white'
-                    }
-                }
-                if (v_index > verse_index ||
-                    v_index === verse_index && t_index > token_index) {
-                        token.style.color = 'gray'
-
-                        if (is_hidden) {
-                            let color = 'lightgray';
-                            if (element_select_value(pattern_select) === '0') {
-                                color = 'white'
-                            }
-                            token.style.color = color
-                            token.style.backgroundColor = color
-                        }
-                    }
+                token_color_update(pattern, token, v_index, t_index);
                 element_html_inner_set(token, t);
 
                 token_total_index++;
             })
         })
         console.log({errors})
+    }
+
+    function token_color_update(pattern, token, v_index, t_index) {
+        let is_hidden = pattern[token.dataset.tokenTotalIndex % pattern.length] === '0';
+        let is_error = errors[error_index_get(v_index, t_index)];
+
+        if (is_error) {
+            token.style.color = 'red';
+        }
+        if (v_index === verse_index && t_index === token_index) {
+            token.style.backgroundColor = 'black';
+
+            if (!is_hidden) {
+                token.style.color = 'white';
+            }
+        }
+        if (v_index > verse_index ||
+            v_index === verse_index && t_index > token_index) {
+            token.style.color = 'gray';
+
+            if (is_hidden) {
+                let color = 'lightgray';
+                if (element_select_value(pattern_select) === '0') {
+                    color = 'white';
+                }
+                token.style.color = color;
+                token.style.backgroundColor = color;
+            }
+        }
     }
 
     function pattern_get() {
