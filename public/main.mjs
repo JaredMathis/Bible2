@@ -252,6 +252,8 @@ export async function main(parent) {
                 refresh = true;
                 if (refresh) {
                     verses_refresh();
+                } else {
+                    
                 }
             })
         })
