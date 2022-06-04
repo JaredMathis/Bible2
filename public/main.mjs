@@ -137,7 +137,7 @@ export async function main(parent) {
                 element_spacer(tokens);
 
                 let token = element(tokens, 'span');
-                token.style.touchAction: 'manipulation'
+                token.style.touchAction = 'manipulation'
                 token.dataset.tokenTotalIndex = token_total_index;
                 _.last(verses_tokens).push(token);
 

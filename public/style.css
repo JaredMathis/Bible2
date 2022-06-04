@@ -10,6 +10,10 @@ button {
     -webkit-appearance: none;
 }
 
+button, select {
+    margin: 0vw;
+}
+
 body {
     font-family: Sans-Serif;
 }

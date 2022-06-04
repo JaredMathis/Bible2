@@ -1,0 +1,64 @@
+[debug] [2022-06-04T05:34:12.262Z] ----------------------------------------------------------------------
+[debug] [2022-06-04T05:34:12.263Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\jared\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-06-04T05:34:12.264Z] CLI Version:   11.0.1
+[debug] [2022-06-04T05:34:12.264Z] Platform:      win32
+[debug] [2022-06-04T05:34:12.264Z] Node Version:  v17.9.0
+[debug] [2022-06-04T05:34:12.265Z] Time:          Sat Jun 04 2022 01:34:12 GMT-0400 (Eastern Daylight Time)
+[debug] [2022-06-04T05:34:12.265Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-06-04T05:34:12.307Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-06-04T05:34:12.308Z] > authorizing via signed-in user (wordslikejared@gmail.com)
+[debug] [2022-06-04T05:34:12.308Z] [iam] checking project wlj-bible for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-06-04T05:34:12.309Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/wlj-bible:testIamPermissions [none]
+[debug] [2022-06-04T05:34:12.309Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/wlj-bible:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-06-04T05:34:12.642Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/wlj-bible:testIamPermissions 200
+[debug] [2022-06-04T05:34:12.642Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/wlj-bible:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-06-04T05:34:12.654Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/wlj-bible [none]
+[debug] [2022-06-04T05:34:13.019Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/wlj-bible 200
+[debug] [2022-06-04T05:34:13.020Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/wlj-bible {"projectId":"wlj-bible","projectNumber":"701726293205","displayName":"wlj-bible","name":"projects/wlj-bible","resources":{"hostingSite":"wlj-bible"},"state":"ACTIVE"}
+[info] 
+[info] === Deploying to 'wlj-bible'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-06-04T05:34:13.033Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/wlj-bible [none]
+[debug] [2022-06-04T05:34:13.324Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/wlj-bible 200
+[debug] [2022-06-04T05:34:13.324Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/wlj-bible {"projectId":"wlj-bible","projectNumber":"701726293205","displayName":"wlj-bible","name":"projects/wlj-bible","resources":{"hostingSite":"wlj-bible"},"state":"ACTIVE"}
+[debug] [2022-06-04T05:34:13.327Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions [none]
+[debug] [2022-06-04T05:34:13.327Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions {"config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-06-04T05:34:13.934Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions 200
+[debug] [2022-06-04T05:34:13.934Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions {"name":"projects/701726293205/sites/wlj-bible/versions/077c3c4f8b6fe32a","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[wlj-bible]: beginning deploy... 
+[info] i  hosting[wlj-bible]: found 3 files in public 
+[debug] [2022-06-04T05:34:13.940Z] [hosting] uploading with 200 concurrency
+[debug] [2022-06-04T05:34:13.946Z] [hosting] hash cache [cHVibGlj] stored for 3 files
+[debug] [2022-06-04T05:34:13.946Z] [hosting][hash queue][FINAL] {"max":3,"min":1,"avg":1.6666666666666667,"active":0,"complete":3,"success":3,"errored":0,"retried":0,"total":3,"elapsed":5}
+[debug] [2022-06-04T05:34:13.946Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions/077c3c4f8b6fe32a:populateFiles [none]
+[debug] [2022-06-04T05:34:13.946Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions/077c3c4f8b6fe32a:populateFiles {"files":{"/index.html":"32888d24629ee828ad00013364725c6b32ba9154ef097fd8dc5b681bfcb13a10","/main.mjs":"95fdeb03391158631db746f9dec8354aba3fce19605d960ae8cc2a94c675d60d","/style.css":"b616c0a9b933f6c5a0b7759a04a37c500d8a4c79aea51ba2efc9daf008d2234d"}}
+[debug] [2022-06-04T05:34:14.353Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions/077c3c4f8b6fe32a:populateFiles 200
+[debug] [2022-06-04T05:34:14.353Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions/077c3c4f8b6fe32a:populateFiles {"uploadRequiredHashes":["b616c0a9b933f6c5a0b7759a04a37c500d8a4c79aea51ba2efc9daf008d2234d"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/wlj-bible/versions/077c3c4f8b6fe32a/files"}
+[debug] [2022-06-04T05:34:14.354Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/wlj-bible/versions/077c3c4f8b6fe32a/files/b616c0a9b933f6c5a0b7759a04a37c500d8a4c79aea51ba2efc9daf008d2234d [none]
+[debug] [2022-06-04T05:34:14.354Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/wlj-bible/versions/077c3c4f8b6fe32a/files/b616c0a9b933f6c5a0b7759a04a37c500d8a4c79aea51ba2efc9daf008d2234d [stream]
+[debug] [2022-06-04T05:34:14.356Z] [hosting][populate queue][FINAL] {"max":409,"min":409,"avg":409,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":411}
+[debug] [2022-06-04T05:34:14.357Z] [hosting] uploads queued: 1
+[debug] [2022-06-04T05:34:15.117Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/wlj-bible/versions/077c3c4f8b6fe32a/files/b616c0a9b933f6c5a0b7759a04a37c500d8a4c79aea51ba2efc9daf008d2234d 200
+[debug] [2022-06-04T05:34:15.117Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/wlj-bible/versions/077c3c4f8b6fe32a/files/b616c0a9b933f6c5a0b7759a04a37c500d8a4c79aea51ba2efc9daf008d2234d [stream]
+[debug] [2022-06-04T05:34:15.117Z] [hosting][upload queue][FINAL] {"max":764,"min":764,"avg":764,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":764}
+[info] +  hosting[wlj-bible]: file upload complete 
+[debug] [2022-06-04T05:34:15.118Z] [hosting] deploy completed after 1183ms
+[debug] [2022-06-04T05:34:15.123Z] [
+  {
+    "config": {
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*"
+      ],
+      "site": "wlj-bible"
+    },
+    "site": "wlj-bible",
+    "version": "projects/701726293205/sites/wlj-bible/versions/077c3c4f8b6fe32a"
+  }
+]
+[info] i  hosting[wlj-bible]: finalizing version... 
+[debug] [2022-06-04T05:34:15.124Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions/077c3c4f8b6fe32a updateMask=status%2Cconfig
+[debug] [2022-06-04T05:34:15.124Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/701726293205/sites/wlj-bible/versions/077c3c4f8b6fe32a {"status":"FINALIZED","config":{}}
