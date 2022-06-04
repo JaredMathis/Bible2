@@ -227,69 +227,73 @@ export async function main(parent, bible_override) {
             element_html_inner_set(key, k.toUpperCase());
 
             key.addEventListener('mousedown', () => {
-                const verse_tokens = partition_current_get()[verse_index].tokens;
-                let expected = verse_tokens[token_index][0].toLowerCase();
-
-                let token_index_before = token_index;
-                let verse_index_before = verse_index;
-
-                let refresh = false;
-                if (!key_is_near(k, expected)) {
-                    errors[error_index_get(verse_index, token_index)] = true;
-                } else {
-                    token_index++;
-
-                    if (token_index >= verse_tokens.length) {
-                        verse_index++;
-                        token_index = 0;
-
-                        if (verse_index >= partition_current_get().length) {
-                            refresh = true;
-                            
-                            verse_index = 0;
-
-                            let repeat = false;
-                            if (element_select_value(pattern_select) === '0') {
-                                if (_.keys(errors).length > 0) {
-                                    repeat = true;    
-                                }
-                            }
-
-                            errors = {};
-                            if (!repeat) {
-                                element_index_selected_increment(pattern_select)
-    
-                                if (pattern_select.selectedIndex < 0) {
-                                    pattern_select.selectedIndex = 0;
-    
-                                    element_index_selected_increment(partition_select)
-                                    partition_select_changed();
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                element_scroll_into_view_vertically_centered(verses_elements[verse_index])
-
-                // refresh = true;
-                if (refresh) {
-                    verses_refresh();
-                } else {
-                    console.log('here')
-                    let pattern = pattern_get();
-
-                    let token_before = verses_tokens[verse_index_before][token_index_before];
-                    token_color_update(pattern, token_before, verse_index_before, token_index_before);
-
-                    let token = verses_tokens[verse_index][token_index];
-                    token_color_update(pattern, token, verse_index, token_index);
-                }
+                on_key(k);
             })
         })
     })
 
     await on_version_change();
+
+    function on_key(k) {
+        const verse_tokens = partition_current_get()[verse_index].tokens;
+        let expected = verse_tokens[token_index][0].toLowerCase();
+
+        let token_index_before = token_index;
+        let verse_index_before = verse_index;
+
+        let refresh = false;
+        if (!key_is_near(k, expected)) {
+            errors[error_index_get(verse_index, token_index)] = true;
+        } else {
+            token_index++;
+
+            if (token_index >= verse_tokens.length) {
+                verse_index++;
+                token_index = 0;
+
+                if (verse_index >= partition_current_get().length) {
+                    refresh = true;
+
+                    verse_index = 0;
+
+                    let repeat = false;
+                    if (element_select_value(pattern_select) === '0') {
+                        if (_.keys(errors).length > 0) {
+                            repeat = true;
+                        }
+                    }
+
+                    errors = {};
+                    if (!repeat) {
+                        element_index_selected_increment(pattern_select);
+
+                        if (pattern_select.selectedIndex < 0) {
+                            pattern_select.selectedIndex = 0;
+
+                            element_index_selected_increment(partition_select);
+                            partition_select_changed();
+                        }
+                    }
+                }
+            }
+        }
+
+        element_scroll_into_view_vertically_centered(verses_elements[verse_index]);
+
+        // refresh = true;
+        if (refresh) {
+            verses_refresh();
+        } else {
+            console.log('here');
+            let pattern = pattern_get();
+
+            let token_before = verses_tokens[verse_index_before][token_index_before];
+            token_color_update(pattern, token_before, verse_index_before, token_index_before);
+
+            let token = verses_tokens[verse_index][token_index];
+            token_color_update(pattern, token, verse_index, token_index);
+        }
+    }
 
     function partition_select_changed() {
         errors = {};
