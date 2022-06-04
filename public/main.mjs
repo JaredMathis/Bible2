@@ -123,6 +123,7 @@ export async function main(parent) {
         let token_total_index = 0;
         element_clear(verses);
         verses_tokens = [];
+        let pattern = pattern_get();
         partition_current_get().forEach((v, v_index) => {
             let verse = element(verses, 'div');
             verses_tokens.push([]);
@@ -142,8 +143,6 @@ export async function main(parent) {
                 let token = element(tokens, 'span');
                 token.dataset.tokenTotalIndex = token_total_index;
                 _.last(verses_tokens).push(token);
-
-                let pattern = pattern_get();
 
                 token_color_update(pattern, v_index, t_index);
                 element_html_inner_set(token, t);
