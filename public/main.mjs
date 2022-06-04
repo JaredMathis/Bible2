@@ -136,11 +136,12 @@ export async function main(parent) {
             v.tokens.forEach((t, t_index) => {
                 element_spacer(tokens);
 
+                let token = element(tokens, 'span');
+
                 let pattern = pattern_get();
+                
                 const is_hidden = pattern[token_total_index % pattern.length] === '0';
                 let is_error = errors[error_index_get(v_index, t_index)];
-
-                let token = element(tokens, 'span');
 
                 if (is_error) {
                     token.style.color = 'red';
