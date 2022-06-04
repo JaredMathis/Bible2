@@ -128,6 +128,7 @@ export async function main(parent) {
             number.addEventListener('click', () => {
                 verse_index = v_index;
                 token_index = 0;
+                errors = {};
                 verses_refresh();
             })
 
