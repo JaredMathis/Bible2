@@ -113,6 +113,8 @@ export async function main(parent) {
         return partitions[partition_select_index]
     }
 
+    let verses_tokens;
+
     let verses = element(parent, 'div');
     verses.style.maxHeight = '55vh'
     verses.style.minHeight = '55vh'
@@ -120,9 +122,10 @@ export async function main(parent) {
     function verses_refresh() {
         let token_total_index = 0;
         element_clear(verses);
+        verses_tokens = [];
         partition_current_get().forEach((v, v_index) => {
             let verse = element(verses, 'div');
-
+            verses_tokens.push([]);
             let number = element(verse, 'button');
             element_html_inner_set(number, v.verse);
             number.addEventListener('click', () => {
@@ -138,10 +141,11 @@ export async function main(parent) {
 
                 let token = element(tokens, 'span');
                 token.dataset.tokenTotalIndex = token_total_index;
+                _.last(verses_tokens).push(token);
 
                 let pattern = pattern_get();
 
-                token_color_update(pattern, token, v_index, t_index);
+                token_color_update(pattern, v_index, t_index);
                 element_html_inner_set(token, t);
 
                 token_total_index++;
@@ -150,7 +154,8 @@ export async function main(parent) {
         console.log({errors})
     }
 
-    function token_color_update(pattern, token, v_index, t_index) {
+    function token_color_update(pattern, v_index, t_index) {
+        let token = verses_tokens[v_index][t_index];
         let is_hidden = pattern[token.dataset.tokenTotalIndex % pattern.length] === '0';
         let is_error = errors[error_index_get(v_index, t_index)];
 
@@ -253,7 +258,7 @@ export async function main(parent) {
                 if (refresh) {
                     verses_refresh();
                 } else {
-                    
+                    token_color_update(pattern, verse_index, token_index);
                 }
             })
         })
