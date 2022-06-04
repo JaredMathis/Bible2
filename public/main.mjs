@@ -136,7 +136,7 @@ export async function main(parent) {
             v.tokens.forEach((t, t_index) => {
                 element_spacer(tokens);
 
-                let pattern = element_select_value(pattern_select).split('');
+                let pattern = pattern_get();
                 const is_hidden = pattern[token_total_index % pattern.length] === '0';
                 let is_error = errors[error_index_get(v_index, t_index)];
 
@@ -171,6 +171,10 @@ export async function main(parent) {
             })
         })
         console.log({errors})
+    }
+
+    function pattern_get() {
+        return element_select_value(pattern_select).split('');
     }
 
     function error_index_get(verse_index, token_index) {
