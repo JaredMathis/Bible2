@@ -164,7 +164,7 @@ export async function main(parent) {
             token.style.color = 'red';
         }
         if (v_index === verse_index && t_index === token_index) {
-            token.style.backgroundColor = is_error ? 'red' : 'black';
+            token.style.backgroundColor = 'black';
             if (!is_hidden) {
                 token.style.color = 'white';
             }
