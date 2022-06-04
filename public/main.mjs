@@ -252,6 +252,7 @@ export async function main(parent) {
                 '10', 
                 '01', 
                 '100', 
+                '1000',
                 '0', 
                 '0', 
                 '0'
