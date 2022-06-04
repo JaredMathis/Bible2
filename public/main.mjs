@@ -224,6 +224,8 @@ export async function main(parent) {
                         token_index = 0;
 
                         if (verse_index >= partition_current_get().length) {
+                            refresh = true;
+                            
                             verse_index = 0;
 
                             let repeat = false;
