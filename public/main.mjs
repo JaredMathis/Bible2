@@ -110,6 +110,7 @@ export async function main(parent) {
     }
 
     let verses_tokens;
+    let verses_elements;
 
     let verses = element(parent, 'div');
     let height = '52vh';
@@ -120,10 +121,12 @@ export async function main(parent) {
         let token_total_index = 0;
         element_clear(verses);
         verses_tokens = [];
+        verses_elements = [];
         let pattern = pattern_get();
         partition_current_get().forEach((v, v_index) => {
             let verse = element(verses, 'div');
             verses_tokens.push([]);
+            verses_elements.push(verse);
             let number = element(verse, 'button');
             element_html_inner_set(number, v.verse);
             number.addEventListener('click', () => {
@@ -131,6 +134,7 @@ export async function main(parent) {
                 token_index = 0;
                 errors = {};
                 verses_refresh();
+                element_scroll_into_view_vertically_centered(verses_elements[verse_index])
             })
 
             let tokens = element(verse, 'span');
@@ -253,6 +257,9 @@ export async function main(parent) {
                         }
                     }
                 }
+                
+                element_scroll_into_view_vertically_centered(verses_elements[verse_index])
+
                 // refresh = true;
                 if (refresh) {
                     verses_refresh();
@@ -291,6 +298,10 @@ export async function main(parent) {
             element_select_update(pattern_select, pattern_1);
         }
     }
+}
+
+function element_scroll_into_view_vertically_centered(element) {
+    element.scrollIntoView({block:'center'})
 }
 
 let key_is_near_mapping = {
