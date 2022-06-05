@@ -230,8 +230,6 @@ export async function main(parent, bible_override) {
                 on_key(k);
             })
         })
-
-
     })
     
     document.addEventListener('keydown', (event) => {
