@@ -234,11 +234,11 @@ export async function main(parent, bible_override) {
 
     })
     
-    document.addEventListener('keydown', _.debounce((event) => {
+    document.addEventListener('keydown', (event) => {
         event.preventDefault();
         var name = event.key;
         on_key(name);
-    }, 100), false);
+    }, false);
 
     await on_version_change();
 
