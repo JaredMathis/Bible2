@@ -6,7 +6,11 @@ select {
     font-size: 4vw;
 }
 
-span, button {
+span {
+    font-size: 4.5vw;
+}
+
+button {
     font-size: 4.25vw;
 }
 
