@@ -325,6 +325,7 @@ export async function main(parent, bible_override) {
             const pattern_2 = [
                 '1', 
                 '110', 
+                '11010', 
                 '10', 
                 '01', 
                 '100', 
