@@ -242,7 +242,8 @@ export async function main(parent, bible_override) {
 
     function on_key(k) {
         const verse_tokens = partition_current_get()[verse_index].tokens;
-        let expected = verse_tokens[token_index][0].toLowerCase();
+        const verse_token = verse_tokens[token_index];
+        let expected = verse_token[0].toLowerCase();
 
         let token_index_before = token_index;
         let verse_index_before = verse_index;
