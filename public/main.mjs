@@ -323,10 +323,12 @@ export async function main(parent, bible_override) {
         verse_index = 0;
         if (partition_current_get().length >= array_partition_max_size * 2) {
             const pattern_2 = [
+                '1', 
                 '10', 
                 '01', 
                 '100', 
                 '1000',
+                '10000',
                 '0', 
                 '0', 
                 '0'
