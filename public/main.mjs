@@ -324,6 +324,7 @@ export async function main(parent, bible_override) {
         if (partition_current_get().length >= array_partition_max_size * 2) {
             const pattern_2 = [
                 '1', 
+                '110', 
                 '10', 
                 '01', 
                 '100', 
