@@ -360,6 +360,7 @@ export async function main(parent, bible_override) {
                 '100', 
                 '1000',
                 '10000',
+                '100000',
                 '0', 
                 '0', 
                 '0'
