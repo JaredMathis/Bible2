@@ -240,10 +240,25 @@ export async function main(parent, bible_override) {
 
     await on_version_change();
 
+    let alphabet = keys.join("");
+    function js_string_remove_all_except(s, characters_to_keep) {
+        let result = "";
+        for (let a of s) {
+            if (characters_to_keep.includes(a)) {
+                result += a;
+            }
+        }
+        return result;
+    }
+
     function on_key(k) {
         const verse_tokens = partition_current_get()[verse_index].tokens;
-        const verse_token = verse_tokens[token_index];
-        let expected = verse_token[0].toLowerCase();
+        const verse_token = verse_tokens[token_index].toLowerCase();
+        let verse_token_removed = js_string_remove_all_except(
+            verse_token,
+            alphabet
+        );
+        let expected = verse_token_removed[0];
 
         let token_index_before = token_index;
         let verse_index_before = verse_index;
