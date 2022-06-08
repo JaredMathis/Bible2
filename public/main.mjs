@@ -19,7 +19,7 @@ export async function main(parent, bible_override) {
         parent, versions);
     element_on(version_select, 'change', on_version_change);
 
-    if(bible_override) {
+    if (bible_override) {
         version_select.style.display = 'none'
     }
 
@@ -41,14 +41,29 @@ export async function main(parent, bible_override) {
 
     function books_refresh() {
         let books = _.uniq(_.map(bible, 'book'));
-        element_select_update(book_select, books)
+        element_select_update(book_select, books);
+        local_storage_select_value_set(book_select, 'book');
         on_book_change();
+    }
+
+    function local_storage_select_value_set(select, key) {
+        let value = localStorage.getItem(key);
+        console.log(local_storage_select_value_set.name, {key,value})
+        if (_.isString(value)) {
+            select.value = value;
+        }
     }
 
     function on_book_change() {
         book = element_select_value(book_select);
         book_verses = _.filter(bible, {book});
         chapters_refresh();
+
+        local_storage_item_set('book', book);
+    }
+
+    function local_storage_item_set(key, value) {
+        localStorage.setItem(key, value);
     }
 
     let chapter_select = await element_select(
@@ -58,16 +73,21 @@ export async function main(parent, bible_override) {
     function chapters_refresh() {
         let chapters = _.uniq(_.map(book_verses, 'chapter'));
         element_select_update(chapter_select, chapters)
+        local_storage_select_value_set(chapter_select, 'chapter');
         on_chapter_change();
     }
 
     let partition_select = await element_select(
         parent, []);
-    element_on(partition_select, 'change', () => {
+    element_on(partition_select, 'change', on_partition_change);
+    function on_partition_change() {
         partition_select_changed();
         verses_refresh();
-    });
 
+        let partition = element_select_value(partition_select);
+        local_storage_item_set('partition', partition);
+
+    }
     let array_partition_max_size = 2;
     let partitioned;
     let partitions;
@@ -82,11 +102,15 @@ export async function main(parent, bible_override) {
                 key: index
             }
         }))
+        local_storage_select_value_set(partition_select, 'partition');
+        partition_select_changed();
 
         errors = {};
         token_index = 0;
         verse_index = 0;
         verses_refresh();
+
+        local_storage_item_set('chapter', chapter);
     }
 
     let pattern_1 = [
@@ -107,10 +131,15 @@ export async function main(parent, bible_override) {
 
     let pattern_select = await element_select(
         parent, pattern_1);
-    element_on(pattern_select, 'change', () => {
+    element_on(pattern_select, 'change', on_pattern_change);
+    
+    function on_pattern_change() {
         errors = {};
         verses_refresh();
-    });
+
+        let pattern = element_select_value(pattern_select);
+        local_storage_item_set('pattern', pattern);
+    }
 
     function partition_current_get() {
         const partition_select_index =
@@ -306,7 +335,6 @@ export async function main(parent, bible_override) {
         if (refresh) {
             verses_refresh();
         } else {
-            console.log('here');
             let pattern = pattern_get();
 
             let token_before = verses_tokens[verse_index_before][token_index_before];
@@ -338,6 +366,10 @@ export async function main(parent, bible_override) {
             element_select_update(pattern_select, pattern_2);
         } else {
             element_select_update(pattern_select, pattern_1);
+        }
+        local_storage_select_value_set(pattern_select, 'pattern');
+        if (pattern_select.selectedIndex < 0) {
+            pattern_select.selectedIndex = 0;
         }
     }
 }
