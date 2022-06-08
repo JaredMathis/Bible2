@@ -356,6 +356,7 @@ export async function main(parent, bible_override) {
                 '11010', 
                 '10', 
                 '01', 
+                '10100',
                 '100', 
                 '1000',
                 '10000',
