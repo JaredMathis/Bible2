@@ -177,7 +177,8 @@ export async function main(parent, bible_override) {
 
             let tokens = element(verse, 'span');
             v.tokens.forEach((t, t_index) => {
-                element_spacer(tokens);
+                let spacer = element_spacer(tokens);
+                spacer.style.fontSize = '1.5vh'
 
                 let token = element(tokens, 'span');
                 token.style.touchAction = 'manipulation'
@@ -196,22 +197,14 @@ export async function main(parent, bible_override) {
         let is_hidden = pattern[token.dataset.tokenTotalIndex % pattern.length] === '0';
         let is_error = errors[error_index_get(v_index, t_index)];
 
+        token.style.borderLeft = '0.5vh solid white'
         token.style.backgroundColor = 'white'
         token.style.color = 'black'
         if (is_error) {
             token.style.color = 'red';
         }
-        if (v_index === verse_index && t_index === token_index) {
-            token.style.backgroundColor = is_error ? 'red' : 'black';
-            token.style.color = 'white';
-            if (is_hidden) {
-                if (!is_error) {
-                    token.style.color = 'black';
-                }
-            }
-        }
         if (v_index > verse_index ||
-            v_index === verse_index && t_index > token_index) {
+            v_index === verse_index && t_index >= token_index) {
             token.style.color = 'gray';
 
             if (is_hidden) {
@@ -222,6 +215,15 @@ export async function main(parent, bible_override) {
                 token.style.color = color;
                 token.style.backgroundColor = color;
             }
+        }
+        if (v_index === verse_index && t_index === token_index) {
+            token.style.borderLeft = '0.5vh solid blue'
+            if (is_error) {
+                token.style.backgroundColor = 'red';
+            } else {
+                token.style.backgroundColor = 'white'
+            }
+            token.style.color = 'white';
         }
     }
 
@@ -450,6 +452,7 @@ function array_partition(array, min_size) {
 function element_spacer(parent) {
     let spacer = element(parent, 'span');
     element_html_inner_set(spacer, ' ');
+    return spacer
 }
 
 function element_select_value(select) {
