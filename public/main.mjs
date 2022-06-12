@@ -223,7 +223,9 @@ export async function main(parent, bible_override) {
             } else {
                 token.style.backgroundColor = 'white'
             }
-            token.style.color = 'white';
+            if (element_select_value(pattern_select) !== '1') {
+                token.style.color = 'white';
+            }
         }
     }
 
