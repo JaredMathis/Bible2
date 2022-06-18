@@ -209,6 +209,7 @@ export async function main(parent, bible_override) {
 
             if (is_hidden) {
                 let color = 'lightgray';
+                color = 'white';
                 if (element_select_value(pattern_select) === '0') {
                     color = 'white';
                 }
